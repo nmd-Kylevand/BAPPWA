@@ -1,6 +1,9 @@
 html{
     background-color: black;
 }
+p, h1, h2, h3{
+    color:white;
+}
 p, h1{
     font-family: "proxima-nova", sans-serif;
     font-weight: 400;

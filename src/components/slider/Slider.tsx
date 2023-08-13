@@ -5,7 +5,9 @@ import { useState } from "react";
 import { redirect } from "next/navigation";
 
 
-
+interface MyComponentProps {
+    direction?: string 
+}
 
 const theme = createTheme({
     palette: {
@@ -15,7 +17,7 @@ const theme = createTheme({
     }
 })
 
-const SliderButton = () => {
+const SliderButton = (props: MyComponentProps) => {
     const [value, setValue] = useState(0)
 
    
@@ -35,6 +37,7 @@ const SliderButton = () => {
         <Slider
             color="primary"
             size="small"
+            orientation={props.direction}
             value={value}
             min={0}
             max={50}

@@ -22,9 +22,6 @@ const OffScreenDiv = styled.div`
 const Earth = dynamic(() => import('@/components/canvas/earth/index').then((mod) => mod.Model), {ssr: false})
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
-  loading: () => (
-    <Loader/>
-  ),
 })
 const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
 

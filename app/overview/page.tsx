@@ -7,9 +7,6 @@ import { Suspense } from "react"
 const AnimatedEarth = dynamic(() => import('@/components/canvas/earthWithAnimations/index').then((mod) => mod.Model),{ssr: false} )
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
-  loading: () => (
-    <Loader/>
-  ),
 })
 const Timeline = dynamic(() => import('@/components/timeline/Timeline'), {ssr: false})
 
