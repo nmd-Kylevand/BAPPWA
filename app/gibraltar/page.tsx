@@ -1,7 +1,6 @@
 "use client"
 
-// import Loader from "@/components/loader/Loader";
-import { Html, OrbitControls, PerspectiveCamera, useProgress } from "@react-three/drei";
+import { Html} from "@react-three/drei";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import Loader from "@/components/loader/Loader";
@@ -12,13 +11,12 @@ import hugeText from './text'
 import SliderButton from "@/components/slider/Slider";
 import { useSpeechSynthesis } from "react-speech-kit";
 
-let isLoading;
 
 const Model = dynamic(() => import('@/components/canvas/locationModels/index').then((mod) => mod.Gibraltar), {
     ssr: false, 
         loading: () => {
         
-        return <Loader text='May 1765, England'/> 
+        return <Loader text='June 1779, Spain'/> 
     },
         
     })
@@ -30,13 +28,9 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 const TextComponent = () => {
     return(
         <>
-                <p>The HMS Victory was ordered by the British Admiralty to be built as a 100-gun first-rate ship of the line. The ship, designed by naval architect Sir Thomas Slade, 
-                began construction at the Chatham Dockyard.</p>
+                <p>The Siege of Gibraltar took place during the American Revolutionary War and lasted from 1779 to 1783. It involved a prolonged blockade and military campaign by the Spanish and French forces against the British-held fortress of Gibraltar. The objective was to capture Gibraltar and gain control of the strategic Mediterranean passage.</p>
                 <br/>
-                <p> Around 6000 trees were used for the construction of the hull which is equivalent to 60 acres of forest. Amounting to a total of £63,176 (over £50 million today).
-                It was an unpopular decision among sailors to name the ship Victory as the previous ship which had that name sunk with all on board in the English channel, 25 years before the Victory.
-                On 7 May 1765 the Victory was finally launched, but it wasn’t until 13 years later that it would see its first active service in the War of American Independence (1775-83). Due to its excellent design of the underwater hull, the Victory would prove itself successful in sailing faster than many of its smaller consorts.
-            </p>
+                <p> By the year 1782, the HMS Victory had already amassed a significant number of distinguished naval battle accolades. It assumed the role of Lord Howe&apos;s flagship of a powerful escort flotilla for a convoy of transports and actively participated in the Relief of Gibraltar on October 11th of the same year. The significance of this relief operation cannot be emphasized enough. The supplies that the ships brought allowed the Gibraltar garrison to continue to hold out against the besieging forces. Moreover, this decisive action ensured the continuous presence of the British at the gateway to the Mediterranean.</p>
         </>
     )
 }
@@ -58,21 +52,22 @@ export default function Page() {
     
     return (
             <>
+                {/* @ts-ignore */}
                 <View className="background-image relative h-full w-full items-center justify-center">
                         <Model playAnimation={isCompleted}/>
-                        <Html as="div">
-                             <div className={"w-96 absolute right-96 " + (show ? '-top-44' : 'top-72' )}>
-                                <h1 className=" fontBlack w-96 "><span className="text-4xl">Chatham England</span> <FontAwesomeIcon onClick={() => setShow(!show)} className="ml-4 cursor-pointer text-white" icon={faChevronDown} /> <FontAwesomeIcon className="ml-3 cursor-pointer text-base" onClick={() => setPlay(!play)} icon={faVolumeHigh} /></h1>
+                        <Html as="div" zIndexRange={[0, 0]}>
+                             <div className={ "w-96 absolute right-96 z-inde" + (show ? '-top-48' : 'top-72' )}>
+                                <h1 className=" fontBlack w-96 "><span className="text-4xl">Gibraltar</span> <FontAwesomeIcon onClick={() => setShow(!show)} className="ml-4 cursor-pointer text-white" icon={faChevronDown} /> <FontAwesomeIcon className="ml-3 cursor-pointer text-base" onClick={() => setPlay(!play)} icon={faVolumeHigh} /></h1>
                                 
-                                <h3 className="mt-2 w-96 text-xl">7 May 1765</h3>
-                                <h3 className="fontBold my-5  w-96 text-2xl">Launch of the HMS Victory</h3>
+                                <h3 className="mt-2 w-96 text-xl">24 June 1779</h3>
+                                <h3 className="fontBold my-5  w-96 text-2xl">Siege of Gibraltar</h3>
                                 { show ? <Overlay text={<TextComponent/>}/> : null}
 
                             </div>
 
                         </Html>
                 </View>
-                <div className="absolute right-96 top-72 h-60">   
+                <div className="absolute right-96 top-72 z-0 h-60">   
                     <SliderButton sliderEnd={onComplete} direction="vertical"/>
 
                 </div>

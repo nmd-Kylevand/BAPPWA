@@ -10,7 +10,7 @@ to { opacity: 1 }
 `
 const StyledDiv = styled.div`
     width: 100%; 
-    height: 100%;
+    height: 485px;
     top: 0;
     left: 0;
     color: white;
@@ -18,11 +18,13 @@ const StyledDiv = styled.div`
     animation: ${scaleAnimationIn} 1s;
     animation-duration: 1s;
     animation-fill-mode: both;
+    scrollbar-color: red yellow;
+
 
 `
 
 interface MyComponentProps {
-    text: FunctionComponent
+    text: any
 }
 
 

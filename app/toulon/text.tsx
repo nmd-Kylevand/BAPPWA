@@ -1,0 +1,7 @@
+// eslint-disable-next-line import/no-anonymous-default-export
+export default `
+Toulon, a port city on the Mediterranean coast, was a significant naval stronghold, housing the entire French Mediterranean Fleet. Outraged by the Jacobins' perceived tyranny, the moderate republicans rebelled but were later supplanted by royalists as leaders of the uprising. Faced with the imminent arrival of a Republican army, the desperate rebels sought assistance from the British fleet commanded by Admiral Lord Samuel Hood. Hood, wary of a trap, sent Lieutenant Edward Cooke to assess the rebels' intentions and negotiate an alliance.
+ 
+Cooke successfully made contact with the rebel leaders, who agreed to surrender the city and the French ships to the British in exchange for protection and the promise of return after the war. Acting swiftly, Hood seized the opportunity. Accompanied by his flagship, HMS Victory, and 19 ships-of-the-line, he sailed into the harbor on 28 August. The Republican sailors, including Admiral Saint-Julien, had already left the city upon realizing the agreement between the royalists and the British. This allowed Hood to capture Toulon and the French fleet without any resistance.
+The battle of Toulon would not only prove itself to be a important military engagement of the French Revolutionary Wars, which would ultimately end up in a loss for the Anglo-Spanish alliance, but also would be the first military battle win for a young artillery officer named Napoleon Bonaparte by forcing withdrawal of the Anglo-Spanish fleet.
+`

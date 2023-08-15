@@ -9,7 +9,7 @@ type Direction = 'horizontal' | 'vertical'
 interface MyComponentProps {
     direction?: Direction
     route?: string
-    sliderEnd?: boolean 
+    sliderEnd?: any 
 }
 
 
@@ -21,7 +21,7 @@ const theme = createTheme({
     }
 })
 
-const SliderButton = ({direction, route, sliderEnd}) => {
+const SliderButton = ({direction, route, sliderEnd}: MyComponentProps) => {
     const [value, setValue] = useState(0)
     const [isCompleted, setCompleted] = useState(false)
 
@@ -29,9 +29,10 @@ const SliderButton = ({direction, route, sliderEnd}) => {
         setValue(newValue)
     }
 
-    if(value === 50){
+    if(route && value === 50){
         redirect(route)
     }
+    
 
     useEffect(() => {
         if(value === 50){

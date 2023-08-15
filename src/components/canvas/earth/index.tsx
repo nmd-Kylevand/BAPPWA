@@ -7,6 +7,12 @@ import React, { useRef } from 'react'
 import { OrbitControls, useGLTF } from '@react-three/drei'
 import { GLTF } from 'three-stdlib'
 
+interface ComponentProps {
+  earthScale: number,
+  cloudScale: number,
+  props?: JSX.IntrinsicElements['group']
+}
+
 type GLTFResult = GLTF & {
   nodes: {
     earth_color_10K: THREE.Mesh
@@ -18,16 +24,21 @@ type GLTFResult = GLTF & {
   }
 }
 
-export function Model( {earthScale, cloudScale, ...props }: JSX.IntrinsicElements['group']) {
+export function Model( {...props }: ComponentProps ) {
   const group = useRef<THREE.Group>()
   const { nodes, materials } = useGLTF('/earthfinal.glb') as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
         <ambientLight/>
+        {/* @ts-ignore */}
       <directionalLight intensity={1} decay={2} color="#fffcf4" position={[4.08, 5.9, 5.66]} rotation={[-0.52, 0.96, 1.11]} />
+              {/* @ts-ignore */}
 
-      <mesh geometry={nodes.earth_color_10K.geometry} material={materials.earth_color_10K} position={[0.21, 0.37, -0.07]} rotation={[0.55, 1.03, -0.61]} scale={earthScale} />
-      <mesh geometry={nodes.earth_color_10K001.geometry} material={materials.clouds} position={[0.16, 0.39, -0.1]} rotation={[0.55, 1.03, -0.61]} scale={cloudScale} />
+      
+      <mesh geometry={nodes.earth_color_10K.geometry} material={materials.earth_color_10K} position={[0.21, 0.37, -0.07]} rotation={[0.55, 1.03, -0.61]} scale={props.earthScale} />
+                {/* @ts-ignore */}
+
+      <mesh geometry={nodes.earth_color_10K001.geometry} material={materials.clouds} position={[0.16, 0.39, -0.1]} rotation={[0.55, 1.03, -0.61]} scale={props.cloudScale} />
       <OrbitControls
        enableZoom={false}
        />

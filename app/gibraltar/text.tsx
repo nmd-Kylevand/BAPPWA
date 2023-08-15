@@ -1,8 +1,5 @@
+// eslint-disable-next-line import/no-anonymous-default-export
 export default `
-    The HMS Victory was ordered by the British Admiralty to be built as a 100-gun first-rate ship of the line. The ship, designed by naval architect Sir Thomas Slade, began construction at the Chatham Dockyard.
-
-    Around 6000 trees were used for the construction of the hull which is equivalent to 60 acres of forest. Amounting to a total of £63,176 (over £50 million today).
-    It was an unpopular decision among sailors to name the ship Victory as the previous ship which had that name sunk with all on board in the English channel, 25 year before the Victory.
-    On 7 may 1765 the Victory was finally launched, but it wasn’t until 13 years later that it would see its first active service in the War of American Independence (1775-83). Due to its excellent design of the underwater hull, the Victory would prove itself successful in sailing faster than many of its smaller consorts.
-
+The Siege of Gibraltar took place during the American Revolutionary War and lasted from 1779 to 1783. It involved a prolonged blockade and military campaign by the Spanish and French forces against the British-held fortress of Gibraltar. The objective was to capture Gibraltar and gain control of the strategic Mediterranean passage.
+By the year 1782, the HMS Victory had already amassed a significant number of distinguished naval battle accolades. It assumed the role of Lord Howe's flagship of a powerful escort flotilla for a convoy of transports and actively participated in the Relief of Gibraltar on October 11th of the same year. The significance of this relief operation cannot be emphasized enough. The supplies that the ships brought allowed the Gibraltar garrison to continue to hold out against the besieging forces. Moreover, this decisive action ensured the continuous presence of the British at the gateway to the Mediterranean.
 `
