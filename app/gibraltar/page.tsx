@@ -4,7 +4,6 @@
 import { Html, OrbitControls, PerspectiveCamera, useProgress } from "@react-three/drei";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import './chatham.css';
 import Loader from "@/components/loader/Loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +14,7 @@ import { useSpeechSynthesis } from "react-speech-kit";
 
 let isLoading;
 
-const Model = dynamic(() => import('@/components/canvas/locationModels/index').then((mod) => mod.Chatham), {
+const Model = dynamic(() => import('@/components/canvas/locationModels/index').then((mod) => mod.Gibraltar), {
     ssr: false, 
         loading: () => {
         

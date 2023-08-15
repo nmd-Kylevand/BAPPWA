@@ -1,6 +1,13 @@
-import { styled } from "styled-components"
+import { FunctionComponent } from "react"
+import { keyframes, styled } from "styled-components"
 
-
+const scaleAnimationIn = keyframes`
+from {
+    opacity: 0;
+    transform: translateY(100%);
+}
+to { opacity: 1 }
+`
 const StyledDiv = styled.div`
     width: 100%; 
     height: 100%;
@@ -8,19 +15,21 @@ const StyledDiv = styled.div`
     left: 0;
     color: white;
     overflow-y: scroll;
-
+    animation: ${scaleAnimationIn} 1s;
+    animation-duration: 1s;
+    animation-fill-mode: both;
 
 `
 
 interface MyComponentProps {
-    text: string
+    text: FunctionComponent
 }
 
 
-const Overlay = (props: MyComponentProps) => {
+const Overlay = ({text}: MyComponentProps) => {
     return(
         <StyledDiv>
-            {props.text}
+            {text}
         </StyledDiv>
     )   
 }

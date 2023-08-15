@@ -1,13 +1,17 @@
 import { keyframes, styled } from "styled-components"
 import { createTheme, Slider, SliderMark, ThemeProvider } from "@mui/material";
 import './slider.css'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 
+type Direction = 'horizontal' | 'vertical'
 
 interface MyComponentProps {
-    direction?: string 
+    direction?: Direction
+    route?: string
+    sliderEnd?: boolean 
 }
+
 
 const theme = createTheme({
     palette: {
@@ -17,36 +21,39 @@ const theme = createTheme({
     }
 })
 
-const SliderButton = (props: MyComponentProps) => {
+const SliderButton = ({direction, route, sliderEnd}) => {
     const [value, setValue] = useState(0)
-
-   
+    const [isCompleted, setCompleted] = useState(false)
 
     const handleChange = (event, newValue) => {
         setValue(newValue)
     }
 
     if(value === 50){
-        redirect('/overview')
+        redirect(route)
     }
-    console.log(value)
 
+    useEffect(() => {
+        if(value === 50){
+            setCompleted(true)
+            sliderEnd(isCompleted)
+        }
+    },[value, setCompleted, isCompleted, sliderEnd])
 
     return (
         <ThemeProvider theme={theme}>
         <Slider
             color="primary"
             size="small"
-            orientation={props.direction}
+            orientation={direction}
             value={value}
             min={0}
             max={50}
             onChange={handleChange}
         sx={{
-            
-            "& .MuiSlider-track":{
-                width: "250px",
-            },
+            '& input[type="range"]': {
+                WebkitAppearance: 'slider-vertical',
+              },
             "& .MuiSlider-thumb": {
                 color: "secondary",
                 height: 12,

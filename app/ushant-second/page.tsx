@@ -4,7 +4,6 @@
 import { Html, OrbitControls, PerspectiveCamera, useProgress } from "@react-three/drei";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import './chatham.css';
 import Loader from "@/components/loader/Loader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
@@ -15,7 +14,7 @@ import { useSpeechSynthesis } from "react-speech-kit";
 
 let isLoading;
 
-const Model = dynamic(() => import('@/components/canvas/locationModels/index').then((mod) => mod.Chatham), {
+const Model = dynamic(() => import('@/components/canvas/ocean/index').then((mod) => mod.Model), {
     ssr: false, 
         loading: () => {
         
@@ -31,13 +30,12 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 const TextComponent = () => {
     return(
         <>
-                <p>The HMS Victory was ordered by the British Admiralty to be built as a 100-gun first-rate ship of the line. The ship, designed by naval architect Sir Thomas Slade, 
-                began construction at the Chatham Dockyard.</p>
+               <p>December 12th  1781, a French convoy sailing from Brest to the East and West indie with reinforcements and stores, encounters a British squadron commanded by Rear Admiral Richard Kempenfelt in the HMS Victory with orders to intercept the French convoy.</p>
+               <br/>
+               <p>At first, Guichen's fleet positioned themselves in a downwind position relative to the convoy. This strategic placement enabled the British ships to swiftly descend upon and seize 15 ships transporting troops and resources, all before the French ships could intervene.
+                </p>
                 <br/>
-                <p> Around 6000 trees were used for the construction of the hull which is equivalent to 60 acres of forest. Amounting to a total of £63,176 (over £50 million today).
-                It was an unpopular decision among sailors to name the ship Victory as the previous ship which had that name sunk with all on board in the English channel, 25 years before the Victory.
-                On 7 May 1765 the Victory was finally launched, but it wasn’t until 13 years later that it would see its first active service in the War of American Independence (1775-83). Due to its excellent design of the underwater hull, the Victory would prove itself successful in sailing faster than many of its smaller consorts.
-            </p>
+               <p> Although Kempenfelt's fleet lacked the strength to engage the 19 French escorts directly, the French convoy, knowingly taking the chance of sailing during the stormy season in the North Atlantic to evade British forces, found themselves scattered amidst a powerful gale shortly after. Consequently, the majority of the ships were compelled to retreat back to port.   </p>
         </>
     )
 }
@@ -63,10 +61,10 @@ export default function Page() {
                         <Model playAnimation={isCompleted}/>
                         <Html as="div">
                              <div className={"w-96 absolute right-96 " + (show ? '-top-44' : 'top-72' )}>
-                                <h1 className=" fontBlack w-96 "><span className="text-4xl">Chatham England</span> <FontAwesomeIcon onClick={() => setShow(!show)} className="ml-4 cursor-pointer text-white" icon={faChevronDown} /> <FontAwesomeIcon className="ml-3 cursor-pointer text-base" onClick={() => setPlay(!play)} icon={faVolumeHigh} /></h1>
+                                <h1 className=" fontBlack w-96 "><span className="text-4xl">160 km west of Ushant </span> <FontAwesomeIcon onClick={() => setShow(!show)} className="ml-4 cursor-pointer text-white" icon={faChevronDown} /> <FontAwesomeIcon className="ml-3 cursor-pointer text-base" onClick={() => setPlay(!play)} icon={faVolumeHigh} /></h1>
                                 
-                                <h3 className="mt-2 w-96 text-xl">7 May 1765</h3>
-                                <h3 className="fontBold my-5  w-96 text-2xl">Launch of the HMS Victory</h3>
+                                <h3 className="mt-2 w-96 text-xl">17 December 1781</h3>
+                                <h3 className="fontBold my-5  w-96 text-2xl">Second battle of Ushant</h3>
                                 { show ? <Overlay text={<TextComponent/>}/> : null}
 
                             </div>

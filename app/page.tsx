@@ -35,7 +35,7 @@ export default function Page() {
           <Title className='fontBold my-4 ml-52 text-5xl font-bold leading-tight'>HMS Victory</Title>
           
           <div className="ml-56 w-64">
-              <Slider/>
+              <Slider route={'/overview'}/>
                 <div className='uppercase text-white'>
               <p className='text-right'>Swipe to start the journey</p>
             </div>
