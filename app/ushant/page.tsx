@@ -59,12 +59,12 @@ export default function Page() {
                     {/* @ts-ignore */}
                         <Model playAnimation={isCompleted}/>
                         <Html as="div" zIndexRange={[0, 0]}>
-                        <div className="absolute -top-80 right-96 w-96 lg:right-44 2xl:right-96">
+                        <div className="absolute w-96 md:-top-60 md:right-20 2xl:-top-80 2xl:right-96">
                             <Link className="fontBold uppercase text-white" href="/overview">Back</Link>
 
                             </div>
 
-                             <div className={"w-96 absolute lg:right-44 2xl:right-96 " + (show ? '-top-44' : 'lg:top-60 2xl:top-74' )}>
+                             <div className={"w-96 absolute md:right-24 xl:right-72 2xl:right-96  " + (show ? '-top-44' : 'md:top-40 2xl:top-74' )}>
                                 <h1 className=" fontBlack w-96 "><span className="text-4xl">160 km west of Ushant </span> <FontAwesomeIcon onClick={() => setShow(!show)} className="ml-4 cursor-pointer text-white" icon={faChevronDown} /> <FontAwesomeIcon className="ml-3 cursor-pointer text-base" onClick={() => setPlay(!play)} icon={faVolumeHigh} /></h1>
                                 
                                 <h3 className="mt-2 w-96 text-xl">27 July 1778</h3>

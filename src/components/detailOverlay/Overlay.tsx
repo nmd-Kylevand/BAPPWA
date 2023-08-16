@@ -10,7 +10,6 @@ to { opacity: 1 }
 `
 const StyledDiv = styled.div`
     width: 100%; 
-    height: 485px;
     top: 0;
     left: 0;
     color: white;
@@ -30,7 +29,7 @@ interface MyComponentProps {
 
 const Overlay = ({text}: MyComponentProps) => {
     return(
-        <StyledDiv>
+        <StyledDiv className='lg:h-72 2xl:h-96'>
             {text}
         </StyledDiv>
     )   
