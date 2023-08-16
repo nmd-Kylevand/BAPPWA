@@ -26,6 +26,8 @@ type GLTFResult = GLTF & {
 
 export function Model( {...props }: ComponentProps ) {
   const group = useRef<THREE.Group>()
+  THREE.Cache.enabled = true
+
   const { nodes, materials } = useGLTF('/earthfinal.glb') as GLTFResult
   return (
     <group ref={group} {...props} dispose={null}>
@@ -41,6 +43,8 @@ export function Model( {...props }: ComponentProps ) {
       <mesh geometry={nodes.earth_color_10K001.geometry} material={materials.clouds} position={[0.16, 0.39, -0.1]} rotation={[0.55, 1.03, -0.61]} scale={props.cloudScale} />
       <OrbitControls
        enableZoom={false}
+       autoRotate={true} 
+       autoRotateSpeed={1.0}
        />
     </group>
   )

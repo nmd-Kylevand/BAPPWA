@@ -8,8 +8,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
 import Overlay from "@/components/detailOverlay/Overlay";
 import hugeText from './text'
-import SliderButton from "@/components/slider/Slider";
 import { useSpeechSynthesis } from "react-speech-kit";
+import Link from "next/link";
+
+const Slider = dynamic(() => import('@/components/slider/Slider'), {ssr: false})
 
 const Model = dynamic(() => import('@/components/canvas/locationModels/index').then((mod) => mod.Chatham), {
     ssr: false, 
@@ -57,9 +59,15 @@ export default function Page() {
             <>
                 {/* @ts-ignore */}
                 <View className="background-image relative h-full w-full items-center justify-center">
+                        
                         <Model playAnimation={isCompleted}/>
+                        
                         <Html as="div" zIndexRange={[0, 0]}>
-                             <div className={"w-96 absolute right-96 " + (show ? '-top-44' : 'top-72' )}>
+                            <div className="absolute -top-80 w-96 lg:right-44 2xl:right-96">
+                            <Link className="fontBold uppercase text-white" href="/overview">Back</Link>
+
+                            </div>
+                             <div className={"w-96 lg:right-40 2xl:right-96 absolute " + (show ? '-top-44' : 'lg:top-64 2xl:top-74' )}>
                                 <h1 className=" fontBlack w-96 "><span className="text-4xl">Chatham England</span> <FontAwesomeIcon onClick={() => setShow(!show)} className="ml-4 cursor-pointer text-white" icon={faChevronDown} /> <FontAwesomeIcon className="ml-3 cursor-pointer text-base" onClick={() => setPlay(!play)} icon={faVolumeHigh} /></h1>
                                 
                                 <h3 className="mt-2 w-96 text-xl">7 May 1765</h3>
@@ -70,8 +78,8 @@ export default function Page() {
 
                         </Html>
                 </View>
-                <div className="absolute right-96 top-72 z-0  h-60">   
-                    <SliderButton sliderEnd={onComplete} direction="vertical"/>
+                <div className="absolute top-72 z-0 h-60 lg:right-24 2xl:right-96">   
+                    <Slider sliderEnd={onComplete} direction="vertical"/>
 
                 </div>
 

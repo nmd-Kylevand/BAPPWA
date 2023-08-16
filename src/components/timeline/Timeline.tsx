@@ -100,9 +100,9 @@ const Timeline = ({currentValue}) => {
                     values={VALUES}
                 />
             </div>
-            <div className="card absolute -top-96 left-72 w-72 cursor-pointer text-left text-xl"><h3 className="fontBold mb-3 uppercase" onClick={() => {
+            <div onClick={() => {
               routing()
-            }}>{description[value]}</h3>
+            }} className="card  absolute cursor-pointer text-left text-xl md:left-0 md:w-full xl:-top-96 xl:left-24 xl:w-72 2xl:left-72	"><h3 className="fontBold mb-3 uppercase" >{description[value]}</h3>
               <p className='text-sm'>{shortDescription[value]}</p>
               <p className='fontBold mt-5 text-sm'>Click to learn more</p>
             </div>

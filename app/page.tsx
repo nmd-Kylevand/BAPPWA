@@ -1,6 +1,6 @@
 'use client'
 
-import Slider from '@/components/slider/Slider'
+import SliderButton from '@/components/slider/Slider'
 import { Html } from '@react-three/drei'
 import dynamic from 'next/dynamic'
 import { styled } from 'styled-components'
@@ -17,7 +17,7 @@ const OffScreenDiv = styled.div`
   overflow: hidden;
 `
 
-
+const Slider = dynamic(() => import('@/components/slider/Slider'), {ssr:false})
 const Earth = dynamic(() => import('@/components/canvas/earth/index').then((mod) => mod.Model), {ssr: false,
 
   loading: () => 
@@ -38,9 +38,9 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 export default function Page() {
   return (
     <>
-      <div className='mt-44 items-center'>
+      <div className='background-image h-full w-full items-center'>
         {/* jumbo */}
-        <div className=' ml-8 flex w-full flex-col items-start justify-center p-12 text-center md:w-2/5 md:text-left  '>
+        <div className=' ml-8 flex w-full flex-col items-start justify-center p-12 pt-44 text-center md:w-2/5 md:text-left  '>
           <Title className='mt-16 w-full uppercase'>Discover the journey of the</Title>
           <Title className='fontBold my-4 ml-52 text-5xl font-bold leading-tight'>HMS Victory</Title>
           

@@ -1,5 +1,4 @@
-import { keyframes, styled } from "styled-components"
-import { createTheme, Slider, SliderMark, ThemeProvider } from "@mui/material";
+import { createTheme, Slider, ThemeProvider } from "@mui/material";
 import './slider.css'
 import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";

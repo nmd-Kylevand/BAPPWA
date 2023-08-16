@@ -37,6 +37,8 @@ type ActionName = 'CurveAction.005' | 'Curve.006Action.002' | 'Curve.001Action.0
 type GLTFActions = Record<ActionName, THREE.AnimationAction>
 
 export function Model({...props }: ComponentProps) {
+  THREE.Cache.enabled = true
+
   const group = useRef<THREE.Group>()
   const { nodes, materials, animations } = useGLTF('/earthFinal_withAnimations2.glb') as GLTFResult
   const { actions } = useAnimations<GLTFActions>(animations, group)
@@ -44,28 +46,77 @@ export function Model({...props }: ComponentProps) {
 
 
   useEffect(() => {
+
     switch (props.animation) {
       case 0:
         actions['CurveAction.005'].play()
-        break;
+        Object.keys(actions).map((key,index) => {
+          if(actions[key] !== actions['CurveAction.005'] )
+          {
+            actions[key].stop()
+          }
+          
+         
+      })
+         break;
       case 1:
       case 2:
         actions['Curve.006Action.002'].play()
+        Object.keys(actions).map((key,index) => {
+          if(actions[key] !== actions['Curve.006Action.002'] )
+          {
+            actions[key].stop()
+          }
+      })
         break;
       case 3:
         actions['Curve.001Action.001'].play()
+        Object.keys(actions).map((key,index) => {
+          if(actions[key] !== actions['Curve.001Action.001'] )
+          {
+            actions[key].stop()
+          }
+      })
         break;
       case 4: 
         actions['Curve.002Action'].play()
+        Object.keys(actions).map((key,index) => {
+          if(actions[key] !== actions['Curve.002Action'] )
+          {
+            actions[key].stop()
+          }
+      })
         break;
       case 5:
+        
         actions['Curve.003Action'].play()
+          Object.keys(actions).map((key,index) => {
+            if(actions[key] !== actions['Curve.003Action'] )
+            {
+              actions[key].stop()
+            }
+        })
         break;
       case 6:
+
         actions['Curve.004Action'].play()
+        Object.keys(actions).map((key,index) => {
+          if(actions[key] !== actions['Curve.004Action'] )
+          {
+            actions[key].stop()
+          }
+        })
+
         break;
       case 7:
+
         actions['Curve.005Action.001'].play()
+        Object.keys(actions).map((key,index) => {
+          if(actions[key] !== actions['Curve.005Action.001'] )
+          {
+            actions[key].stop()
+          }
+        })
         break;
       default:
         break;

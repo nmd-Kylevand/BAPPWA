@@ -38,7 +38,7 @@ export default function Page() {
       <>
           <div className="background-image h-full">
                 {/* @ts-ignore */}
-              <View className='bottom-96 h-5/6'>
+              <View className='bottom-96 lg:h-4/6 xl:h-5/6'>
                     <Suspense  fallback={null}>
                         <AnimatedEarth animation={timelineValue}/>  
 
