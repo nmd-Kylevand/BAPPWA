@@ -3,7 +3,15 @@
 import Loader from "@/components/loader/Loader"
 import { Html } from "@react-three/drei"
 import dynamic from "next/dynamic"
-import { Suspense, useState } from "react"
+import { Suspense, useEffect, useRef, useState } from "react"
+import styled from "styled-components"
+import { useScroll, useTransform, motion, useSpring, useMotionValue } from "framer-motion"
+
+
+const HorizontalScroll = styled.div`
+  
+    height: 100vw;
+`
 
 const AnimatedEarth = dynamic(() => import('@/components/canvas/earthWithAnimations/index').then((mod) => mod.Model),
 {ssr: false, 
@@ -27,25 +35,69 @@ const Timeline = dynamic(() => import('@/components/timeline/Timeline'), {ssr: f
 
 
 export default function Page() {
-    const [timelineValue, setTimelineValue] = useState(0)
 
+    const [timelineValue, setTimelineValue] = useState(0)
+    const [events, setEvents] = useState([])
     // Gets the value from the timeline component and passes it down to play the right animation on the globe
     const childValue = (value) => {
         setTimelineValue(value)
     }
+    const ref = useRef(null)
+    const { scrollXProgress } = useScroll({container: ref})
 
+    useEffect( () => {
+      const getEvents = async () => {
+        const res = await fetch(process.env.NEXT_PUBLIC_API_PATH + "/api/Events", {
+          mode: 'no-cors',
+
+        })
+        const {events} = await res.json()
+        setEvents(events)
+      }
+      getEvents()
+
+    },[])
+
+    console.log(events)
+    
     return (
       <>
-          <div className="background-image h-full">
-                {/* @ts-ignore */}
-              <View className='bottom-96 lg:h-4/6 xl:h-5/6'>
-                    <Suspense  fallback={null}>
-                        <AnimatedEarth animation={timelineValue}/>  
+        <div ref={ref} className="flex h-full snap-x snap-mandatory overflow-x-auto 	[-ms-overflow-style:'none'] [scrollbar-width:'none'] [&::-webkit-scrollbar]:hidden	">
 
-                    </Suspense>
-                </View>
-                <Timeline  currentValue={childValue}/>
-            </div>
+        {
+          events.map((event) => (
+            <>
+              
+              
+              <div className="background-image grid h-full w-full shrink-0  snap-end  grid-cols-2">
+                    <div className="ml-14">
+                        <div className=" mt-52 text-2xl uppercase"><h1 className="fontBold">{event.title}</h1></div>
+                        <div className="mt-52 w-3/4 text-sm"><p>{event.intro}</p></div>
+                        <div className="mt-4 text-2xl"><p className="fontBold">{event.year}</p></div>
+                        <svg height={100} id="progress" viewBox="0 0 400 100">
+                            <line x1={0} x2={400} pathLength={1} className="bg" stroke-width={20} strokeLinecap="round" strokeLinejoin="round" />
+                            <motion.line x1={0} x2={400} className="indicator" pathLength={1} stroke-width={20} style={{ pathLength: scrollXProgress }} strokeLinecap={"round"} strokeLinejoin={"round"} />
+                        </svg>
+                      </div>
+                <div>
+                        <div key={event.id} className="h-full w-full">
+                          <View className=' lg:h-full xl:h-full'>
+                            <Suspense fallback={null}>
+                              <AnimatedEarth animation={timelineValue} />
+
+                            </Suspense>
+                          </View>
+                        </div>
+                    </div>
+                </div>
+            </>
+            
+            
+          ))
+        }
+        </div>
+
+            
           
           
       </>

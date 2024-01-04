@@ -42,7 +42,6 @@ export function Model({...props }: ComponentProps) {
   const group = useRef<THREE.Group>()
   const { nodes, materials, animations } = useGLTF('/earthFinal_withAnimations2.glb') as GLTFResult
   const { actions } = useAnimations<GLTFActions>(animations, group)
-  const router = useRouter()
 
 
   useEffect(() => {
@@ -129,14 +128,14 @@ export function Model({...props }: ComponentProps) {
         <directionalLight intensity={1} decay={2} color="#fffcf4" position={[4.08, 5.9, 5.66]} rotation={[-0.52, 0.96, 1.11]} />
 
         <mesh name="earth_color_10K" geometry={nodes.earth_color_10K.geometry} material={materials.earth_color_10K} position={[-0.01, 0.09, 0]} rotation={[0.55, 1.03, -0.61]} />
-        <mesh name="earth_color_10K001" geometry={nodes.earth_color_10K001.geometry} material={materials.clouds} position={[0.04, 0.12, -0.02]} rotation={[0.55, 1.03, -0.61]} scale={0.992}/>
-        <mesh name="Curve" className="cursor-pointer" onClick={() => router.push('/chatham')} geometry={nodes.Curve.geometry} material={materials['SVGMat.003']} position={[1.77, 1.41, 0.62]} scale={0} />
-        <mesh name="Curve006" className="cursor-pointer" onClick={() => redirect('/chatham')}  geometry={nodes.Curve006.geometry} material={materials['SVGMat.008']} position={[1.68, 1.35, 0.94]} scale={0} />
-        <mesh name="Curve001" className="cursor-pointer" onClick={() => router.push('/chatham')}  geometry={nodes.Curve001.geometry} material={materials['SVGMat.008']} position={[1.93, 0.93, 1.06]} scale={0} />
-        <mesh name="Curve002" className="cursor-pointer" onClick={() => router.push('/chatham')}  geometry={nodes.Curve002.geometry} material={materials['SVGMat.008']} position={[1.96, 1.13, 0.66]} scale={0} />
-        <mesh name="Curve003" className="cursor-pointer" onClick={() => router.push('/chatham')}  geometry={nodes.Curve003.geometry} material={materials['SVGMat.008']} position={[1.82, 0.97, 1.12]} scale={0} />
-        <mesh name="Curve004" className="cursor-pointer" onClick={() => router.push('/chatham')}  geometry={nodes.Curve004.geometry} material={materials['SVGMat.008']} position={[1.86, 0.93, 1.07]} scale={0} />
-        <mesh name="Curve005" className="cursor-pointer" onClick={() => router.push('/chatham')}  geometry={nodes.Curve005.geometry} material={materials['SVGMat.008']} position={[1.79, 1.52, 0.29]} scale={0} />
+        <mesh name="earth_color_10K001" geometry={nodes.earth_color_10K001.geometry} material={materials.clouds} position={[0.04, 0.12, -0.02]} rotation={[0.55, 1.03, -0.61]} scale={.999}/>
+        <mesh name="Curve" className="cursor-pointer" geometry={nodes.Curve.geometry} material={materials['SVGMat.003']} position={[1.77, 1.41, 0.62]} scale={0} />
+        <mesh name="Curve006" className="cursor-pointer"  geometry={nodes.Curve006.geometry} material={materials['SVGMat.008']} position={[1.68, 1.35, 0.94]} scale={0} />
+        <mesh name="Curve001" className="cursor-pointer"  geometry={nodes.Curve001.geometry} material={materials['SVGMat.008']} position={[1.93, 0.93, 1.06]} scale={0} />
+        <mesh name="Curve002" className="cursor-pointer"  geometry={nodes.Curve002.geometry} material={materials['SVGMat.008']} position={[1.96, 1.13, 0.66]} scale={0} />
+        <mesh name="Curve003" className="cursor-pointer"  geometry={nodes.Curve003.geometry} material={materials['SVGMat.008']} position={[1.82, 0.97, 1.12]} scale={0} />
+        <mesh name="Curve004" className="cursor-pointer"  geometry={nodes.Curve004.geometry} material={materials['SVGMat.008']} position={[1.86, 0.93, 1.07]} scale={0} />
+        <mesh name="Curve005" className="cursor-pointer"  geometry={nodes.Curve005.geometry} material={materials['SVGMat.008']} position={[1.79, 1.52, 0.29]} scale={0} />
       </group>
         <OrbitControls enableZoom={false}/>
     </group>

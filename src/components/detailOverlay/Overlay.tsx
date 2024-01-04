@@ -23,7 +23,7 @@ const StyledDiv = styled.div`
 `
 
 interface MyComponentProps {
-    text: any
+    text: String
 }
 
 

@@ -38,16 +38,16 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 export default function Page() {
   return (
     <>
-      <div className='background-image h-full w-full items-center'>
+      <div className='background-image h-full w-full items-center overflow-hidden'>
         {/* jumbo */}
         <div className=' ml-8 flex w-full flex-col items-start justify-center p-12 pt-44 text-center md:w-2/5 md:text-left  '>
-          <Title className='mt-16 w-full uppercase'>Discover the journey of the</Title>
+          <Title className='mt-16 w-full uppercase'>Discover the story of the</Title>
           <Title className='fontBold my-4 ml-52 text-5xl font-bold leading-tight'>HMS Victory</Title>
           
           <div className="ml-56 mt-10 w-64">
-              <Slider route={'/overview'}/>
+              <Slider route={'/home'}/>
                 <div className='uppercase text-white'>
-              <p className='text-right text-sm'>Swipe to start the journey</p>
+              <p className='text-right text-sm'>Swipe to start the story</p>
             </div>
           </div>
           

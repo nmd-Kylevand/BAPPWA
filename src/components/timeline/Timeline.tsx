@@ -1,17 +1,14 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { Chrono } from 'react-chrono';
 import HorizontalTimeline from 'react-horizontal-timeline';
+import { getEventListeners } from 'stream';
 import { styled } from 'styled-components';
 
 const TimelineWrapper = styled.div`
-    width: 100%;
-    position: relative;
-    top: 100;
-    left: 50%;
-    bottom: 0;
-    transform: translate(-50%, -50%);
-    
+   
+   
     li{
       color:white;
       width: auto !important;
@@ -20,18 +17,22 @@ const TimelineWrapper = styled.div`
       width: 34px !important;
     }
     .card{
+      position: absolute;
+      top: 0;
+      left: 100;
       background-color: rgba(185, 175, 144, 0.84);
       padding: 20px;
     }
 `
 
-const Timeline = ({currentValue}) => {
+const Timeline = ({ currentValue, eventsData }) => {
   const [value, setValue] = useState(0);
   const [previous, setPrevious] = useState(0);
+  const [dates, setDates] = useState<[String]>();
   const router = useRouter()
 
-  const VALUES = ["7 May 1765","27 July 1778","17 December 1781", "24 June 1779", "28 August 1793", "14 February 1797", "21 October 1805"]
-    const description = [
+
+  const description = [
       "Launch. 1765",
       "First battle of Ushant. 1778",
      "Second battle of Ushant. 1781 ",
@@ -39,8 +40,8 @@ const Timeline = ({currentValue}) => {
       "Siege of Toulon. 1793",
       "Battle of Cape St. Vincent. 1797",
       "Battle of Trafalgar. 1805",
-    ];
-
+  ];
+  console.log(description)
     const shortDescription = [
       " The HMS Victory was ordered by the British Admiralty to be built as a 100-gun first-rate ship of the line. The ship, designed by naval architect Sir Thomas Slade, began construction at the Chatham Dockyard.",
       "Battle of Ushan, otherwise known as the First Battle of Ushant, was fought during the American Revolutionary War between the French and the British.",
@@ -53,7 +54,12 @@ const Timeline = ({currentValue}) => {
 
     useEffect(() => {
       currentValue(value)
-    }, [value, currentValue])
+      const dates = eventsData?.map(({ date }) => date);
+      console.log(dates)
+      setDates(dates)
+    }, [value, currentValue, eventsData])
+
+    
 
     const routing = () => {
       switch (value) {
@@ -83,29 +89,37 @@ const Timeline = ({currentValue}) => {
     }
   }
   
+  console.log(eventsData)
       return (
-        <TimelineWrapper className='relative justify-center' >
-            <div style={{
+        dates &&  <TimelineWrapper  >
+          <Chrono 
+            items={eventsData}
+            mode="HORIZONTAL"
+            itemWidth={150}>
+            <div onClick={() => {
+              routing()
+            }} className="card  cursor-pointer text-left text-xl md:left-0 md:w-full xl:-top-96 xl:left-24 xl:w-72 2xl:left-72	"><h3 className="fontBold mb-3 uppercase" >{description[value]}</h3>
+              <p className='text-sm'>{shortDescription[value]}</p>
+              <p className='fontBold mt-5 text-sm'>Click to learn more</p>
+            </div>
+          </Chrono>
+            {/* <div style={{
                 width: "60%",
                 height: "100px",
                 margin: "0 auto"
             }}>
-                <HorizontalTimeline
-                    styles={{ outline: "#FFFFFF", foreground: "#19295C",}}
-                    index={value}
-                    indexClick={(index) => {
-                        setValue(index);
-                        setPrevious(value);
-                    }}
-                    values={VALUES}
-                />
-            </div>
-            <div onClick={() => {
-              routing()
-            }} className="card  absolute cursor-pointer text-left text-xl md:left-0 md:w-full xl:-top-96 xl:left-24 xl:w-72 2xl:left-72	"><h3 className="fontBold mb-3 uppercase" >{description[value]}</h3>
-              <p className='text-sm'>{shortDescription[value]}</p>
-              <p className='fontBold mt-5 text-sm'>Click to learn more</p>
-            </div>
+            <HorizontalTimeline
+              styles={{ outline: "#FFFFFF", foreground: "#19295C", }}
+              index={value}
+              indexClick={(index) => {
+                setValue(index);
+                setPrevious(value);
+              }}
+              values={dates}
+            />
+                
+            </div> */}
+            
         </TimelineWrapper>
       )
 };

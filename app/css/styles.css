@@ -43,3 +43,51 @@ p, h1, h3{
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+
+.progress-bar{
+    transform-origin: 0%;
+    height: 50px;
+    background: #707070;
+}
+.bg {
+  stroke: #707070;
+  opacity: 0.3;
+  height: 20px;
+}
+#progress .indicator {
+  stroke: #B9AF90;
+}
+line{
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.container {
+  width: 600px;
+  height: 600px;
+  z-index: 0;
+  position: fixed;
+  right:100px;
+  bottom: 0;
+  
+}
+
+canvas {
+  cursor: pointer;
+}
+
+[data-is-fullscreen="true"] .container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: auto;
+  height: auto;
+}
+
+.cloudy_background{
+    background-image: url('../../public/img/cloudy_background.png');
+    background-size: cover;
+    opacity: 0.18;
+
+}

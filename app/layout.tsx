@@ -2,8 +2,6 @@
 import { Layout } from '@/components/dom/Layout'
 import '@/global.css'
 import '@/css/styles.css'
-import { useRouter } from 'next/router'
-import { usePathname } from 'next/navigation'
 
 export const metadata = {
   title: 'HMS Victory',
@@ -21,6 +19,7 @@ export default function RootLayout({ children }) {
       <head />
       <body>
         <nav className='absolute left-10 top-2 z-50'>
+            <a className="mr-6 uppercase text-white" href="/">Home</a>
             <a className="uppercase text-white" href="/about">About</a>
           </nav>
         {/* To avoid FOUT with styled-components wrap Layout with StyledComponentsRegistry https://beta.nextjs.org/docs/styling/css-in-js#styled-components */}
