@@ -4,35 +4,34 @@ import { useFrame, useLoader } from "@react-three/fiber";
 import { FBXLoader, GLTFLoader, TGALoader } from "three-stdlib";
 import * as THREE from 'three'
 import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 THREE.Cache.enabled = true
+
+const Ship = dynamic(() => import('@/components/canvas/ship').then((mod) => mod.Ship), { ssr: false })
 
 
 export function Chatham({playAnimation}) {
 
 
-    // THREE.DefaultLoadingManager.addHandler(/\.tga$/i, new TGALoader())
-    const fbx = useLoader(GLTFLoader, '/chatham.glb')
+    THREE.DefaultLoadingManager.addHandler(/\.tga$/i, new TGALoader())
+    const fbx = useLoader(FBXLoader, '/chatham.fbx', ((mesh) => {
+        mesh.side = 2
+    }))
+    console.log(fbx.children)
+    fbx.children.map((mesh) => {
+        
+        console.log(mesh)
+    })
+    const animationRef = useRef()
+
     
-    // const {animations} = fbx;
-    
-    // const {clips} = useAnimations(animations)
-    // let mixer = new THREE.AnimationMixer(fbx)
-    // const action = mixer.clipAction(clips[0])
-
-    // useFrame((state, delta) => mixer.update(delta))
-
-    // useEffect(() => {
-    //     if(playAnimation === true){
-    //         action.play()
-
-    //     }
-    // },[playAnimation,action])
-
     return (
         <group  dispose={null}>
             <ambientLight/>
             <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0]} zoom={0} />
-            <OrbitControls autoRotate={true} enableZoom={false} autoRotateSpeed={1.0} minPolarAngle={0} maxPolarAngle={1.5}/>
+            <OrbitControls  enableZoom={true} autoRotateSpeed={1.0} minPolarAngle={0} maxPolarAngle={1.5}/>
+            <mesh ref={animationRef}><Ship scale={0.5} distances={[0, 20]} position={[-0.868, -0.1, 2.269]} /></mesh>
+
             <primitive  camera={{ position: [10, 10, 10] }} object={fbx}/>
         </group>
         
@@ -42,114 +41,58 @@ export function Chatham({playAnimation}) {
 
 export function Gibraltar({playAnimation}){
 
-    const group = useRef<THREE.Group>()
+    const fbx = useLoader(FBXLoader, '/gibraltar2.fbx')
+    const animationRef = useRef()
+    console.log(fbx)
 
-    THREE.DefaultLoadingManager.addHandler(/\.tga$/i, new TGALoader())
-    const fbx = useLoader(FBXLoader, '/gibraltar.fbx')
-    const {animations} = fbx;
-    
-    const {clips} = useAnimations(animations)
-    let mixer = new THREE.AnimationMixer(fbx)
-    const action = mixer.clipAction(clips[0])
-
-    useFrame((state, delta) => mixer.update(delta))
-
-    useEffect(() => {
-        if(playAnimation === true){
-            action.play()
-
-        }
-    },[playAnimation,action])
     return (
-        <group ref={group} dispose={null}>
-            <ambientLight/>
-            <OrthographicCamera makeDefault  zoom={0.3}
-        top={500}
-        bottom={-200}
-        left={200}
-        right={-200}
-        near={1}
-        far={7000}
-        position={[40, 150, -590]} />
-            <OrbitControls enableZoom={false} minPolarAngle={0} maxPolarAngle={1.5}/>
-            <primitive  camera={{ position: [100, 100, 100] }} object={fbx}/>
+        <group dispose={null}>
+            <ambientLight />
+            <OrbitControls autoRotate={true} enableZoom={true} autoRotateSpeed={1.0} minPolarAngle={0} maxPolarAngle={1.5} />
+            {/* <mesh ref={animationRef}><Ship scale={0.005} distances={[0, 20]} position={[-0.868, -0.1, 2.269]} /></mesh> */}
+
+            <primitive camera={{ position: [0, 0, 0] }} scale={0.05} object={fbx} />
         </group>
+
+    
     )
     
 }
 
 export function Toulon({playAnimation}){
 
-    const group = useRef<THREE.Group>()
-
-    THREE.DefaultLoadingManager.addHandler(/\.tga$/i, new TGALoader())
     const fbx = useLoader(FBXLoader, '/toulon.fbx')
-    const {animations} = fbx;
-    
-    const {clips} = useAnimations(animations)
-    let mixer = new THREE.AnimationMixer(fbx)
-    const action = mixer.clipAction(clips[0])
+    const animationRef = useRef()
 
-    useFrame((state, delta) => mixer.update(delta))
-
-    useEffect(() => {
-        if(playAnimation === true){
-            action.play()
-
-        }
-    },[playAnimation,action])
 
     return (
-        <group ref={group} dispose={null}>
-            <ambientLight/>
-            <OrthographicCamera makeDefault  zoom={1}
-        top={500}
-        bottom={-200}
-        left={200}
-        right={-200}
-        near={1}
-        far={1000}
-        position={[40, 150, -590]} />
-            <OrbitControls autoRotate={true} autoRotateSpeed={1.0} enableZoom={false} minPolarAngle={0} maxPolarAngle={1.5}/>
-            <primitive  camera={{ position: [100, 100, 100] }} object={fbx}/>
+        <group dispose={null}>
+            <ambientLight />
+            <PerspectiveCamera makeDefault fov={90} position={[0, 0, 0]} zoom={0} />
+            <OrbitControls autoRotate={true} enableZoom={false} autoRotateSpeed={1.0} minPolarAngle={0} maxPolarAngle={1.5} />
+            <mesh ref={animationRef}><Ship distances={[0, 20]} position={[-0.868, -0.1, 2.269]} /></mesh>
+
+            <primitive camera={{ position: [10, 10, 10] }} object={fbx} />
         </group>
+
     )
 }
 
 export function CapeStVincent({playAnimation}){
 
-    const group = useRef<THREE.Group>()
+    const fbx = useLoader(FBXLoader, '/CapeStVincent2.fbx')
+    const animationRef = useRef()
 
-    THREE.DefaultLoadingManager.addHandler(/\.tga$/i, new TGALoader())
-    const fbx = useLoader(FBXLoader, '/CapeStVincent.fbx')
-    const {animations} = fbx;
-    
-    const {clips} = useAnimations(animations)
-    let mixer = new THREE.AnimationMixer(fbx)
-    const action = mixer.clipAction(clips[0])
-
-    useFrame((state, delta) => mixer.update(delta))
-
-    useEffect(() => {
-        if(playAnimation === true){
-            action.play()
-
-        }
-    },[playAnimation,action])
 
     return (
-        <group ref={group} dispose={null}>
-            <ambientLight/>
-            <OrthographicCamera makeDefault  zoom={1}
-        top={500}
-        bottom={-200}
-        left={200}
-        right={-200}
-        near={1}
-        far={1000}
-        position={[-40, 150, 590]} />
-            <OrbitControls enableZoom={false} minPolarAngle={0} maxPolarAngle={1.5}/>
-            <primitive  camera={{ position: [100, 100, 100] }} object={fbx}/>
+        <group dispose={null}>
+            <ambientLight />
+            <PerspectiveCamera makeDefault fov={180} position={[0, 0, 0]} zoom={0} />
+            <OrbitControls autoRotate={true} enableZoom={true} autoRotateSpeed={1.0} minPolarAngle={0} maxPolarAngle={1.5} />
+            <mesh ref={animationRef}><Ship distances={[0, 20]} position={[-0.868, -0.1, 2.269]} /></mesh>
+
+            <primitive camera={{ position: [10, 10, 10] }} object={fbx} />
         </group>
+
     )
 }

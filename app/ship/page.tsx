@@ -3,7 +3,7 @@
 import Loader from "@/components/loader/Loader"
 import { Html } from "@react-three/drei"
 import dynamic from "next/dynamic"
-import { Suspense, useEffect, useState } from "react"
+import { Suspense, useEffect, useRef, useState } from "react"
 import { getData } from "../api/Events/route"
 import { Canvas } from "@react-three/fiber"
 import shipPainting from "../../public/img/victory.png"
@@ -11,6 +11,7 @@ import shipPhoto from "../../public/img/victory2.png"
 import Image from "next/image"
 import sails from "../../public/img/sails.png"
 import captain from "../../public/img/HoratioNelson1.png"
+import { useScroll, useTransform, motion } from "framer-motion"
 
 const OceanScene = dynamic(() => import('@/components/canvas/oceanScene/index').then((mod) => mod.Model),
     {
@@ -26,15 +27,22 @@ const OceanScene = dynamic(() => import('@/components/canvas/oceanScene/index').
         </Html>
     })
 
-
+   
 
 
 
 
 export default function Page() {
 
-   
+    const container = useRef(null)
+    const { scrollYProgress } = useScroll({
+        target: container,
+        offset: ['start end', 'end start']
+    })
 
+    const sm = useTransform(scrollYProgress, [0,1], [0, -50])
+    const md = useTransform(scrollYProgress, [0, 1], [0, -150]);
+    const lg = useTransform(scrollYProgress, [0, 1], [0, -450]);
 
     return (
         <>
@@ -42,52 +50,68 @@ export default function Page() {
 
                 <OceanScene/>
             </Canvas>
-            <div>
-                <div>
-                    <p>Chatham</p>
-                    <p>Construction</p>
-                    <p>1759</p>
-                </div>
-                <div>
+            <div ref={container} className="cloudy_background overflow-x-hidden	 bg-[#DEDEDE] text-[#434343]">
+                <motion.div style={{ y: md }} className="grid grid-cols-3 gap-4 pt-8 uppercase">
+                    <p className="ml-14 text-xs tracking-[0.2rem] text-[#434343]">Chatham</p>
+                    <p className="justify-self-center text-xs  tracking-[0.2rem] text-[#434343]">Construction</p>
+                    <p className="mr-14 justify-self-end text-xs  tracking-[0.2rem] text-[#434343]">1759</p>
+                </motion.div>
+                <motion.div style={{ y: lg }} className="ml-[24rem] pt-56">
                     <Image
                         src={shipPainting}
-                        alt="painting of the HMS Victory"/>
+                        alt="painting of the HMS Victory"
+                        className=" absolute right-[26rem]  w-1/3"/>
                     <Image
                         src={shipPhoto}
                         alt="old photo of the HMS Victory"
+                        className="mt-40 w-1/3"
                     />
-                </div>
-                <div>
-                    <p>6,000 trees were using during HMS Victory’s construction and it was built with 104 guns, crewed by 821 sailors. From bowsprit to taffrail, Victory is 226 feet 6 inches long. It also has a width of 51 feet and 10 inches, and weighs 2,196.6 metric tons. In 1780, the bottom of the ship was coated with 3,923 sheets of copper in order to prevent shipworm from weakening it over time.</p>
-                </div>
-                <div>
-                    <p>Sails and knots</p>
-                    <p>The HMS Victory has three masts and had a total of thirty-seven sails.  The fastest the ship was ever recorded as going was 11 knots, which is the equivalent of 12 miles per hour.</p>
-                        <Image
-                        src={sails}
-                        alt="image of some sails"
-                        />
-                </div>
-                <div>
-                    <p>The captain</p>
-                    <Image
-                        src={captain}
-                        alt="image of Nelson"
-                    />
-                    <p>Victory's most famous Admiral was Horatio Nelson who flew his flag from her between May 1803 and October 1805 as Commander-in-Chief of the Mediterranean Fleet. For eighteen months Nelson blockaded the French fleet under Admiral Villeneuve in Toulon.</p>
-                </div>
-                <div>
-                    <p>Don't drink the water</p>
-                    <p>
-                        As with most ships of the era, the crew didn’t drink water on board.  The most common beverages amongst the men were wine and beer.
-                    </p>
-                </div>
-                <div>
-                    <p>Copper bottom</p>
-                    <p>
-                        In 1780, the bottom of the ship was covered with 3,923 sheets of copper.  The purpose of this was to protect the ship below the waterline from shipworm, which are mollusks that have a habit of boring into the wood, weakening it over time.
+                </motion.div>
+                <motion.div style={{y: md}} className="flex items-center justify-center pt-14">
+                    <p className="w-[53rem] leading-10 text-[#434343]">6,000 trees were using during HMS Victory’s construction and it was built with 104 guns, crewed by 821 sailors. From bowsprit to taffrail, Victory is 226 feet 6 inches long. It also has a width of 51 feet and 10 inches, and weighs 2,196.6 metric tons. In 1780, the bottom of the ship was coated with 3,923 sheets of copper in order to prevent shipworm from weakening it over time.</p>
+                </motion.div>
+                <div className="pt-44">
+                    
+                    <p className="pb-44 text-center text-xs uppercase tracking-[0.2rem]  text-[#434343]">Sails and knots</p>
+                    <div className="flex items-center justify-center uppercase">
+                        <p className="w-[53rem] text-center text-2xl text-[#434343]">The HMS Victory has three masts and had a total of thirty-seven sails.  The fastest the ship was ever recorded as going was 11 knots, which is the equivalent of 12 miles per hour.</p>
 
-                    </p>
+                    </div>
+                    <motion.div style={{y:lg}} className="flex items-center justify-center pt-20">
+                        <Image
+                            src={sails}
+                            alt="image of some sails"
+                            className="w-1/3"
+                        />
+                    </motion.div>
+                  
+                </div>
+                <div className="relative bottom-72 left-[55rem]" >
+                    <motion.div style={{y: lg}} className="">
+                        <p className="ml-44 pb-44 text-xs uppercase  tracking-[0.2rem] text-[#434343]">The captain</p>
+                        <Image
+                            src={captain}
+                            alt="image of Nelson"
+                            className="w-1/3"
+                        />
+                        <p className="w-[30rem] pt-14 leading-10 text-[#434343]">Victory's most famous Admiral was Horatio Nelson who flew his flag from her between May 1803 and October 1805 as Commander-in-Chief of the Mediterranean Fleet. For eighteen months Nelson blockaded the French fleet under Admiral Villeneuve in Toulon.</p>
+
+                    </motion.div>
+                 </div>
+                <div className="absolute top-[185rem]  pl-10">
+                    <div className="pb-36">
+                        <p className="pb-16 text-xs uppercase tracking-[0.2rem]  text-[#434343]">Don't drink the water</p>
+                        <p className="w-[30rem] text-[#434343]">
+                            As with most ships of the era, the crew didn’t drink water on board.  The most common beverages amongst the men were wine and beer.
+                        </p>
+                    </div>
+                    <div>
+                        <p className="py-16 text-xs uppercase tracking-[0.2rem] text-[#434343]">Copper bottom</p>
+                        <p className="w-[30rem] text-[#434343]">
+                            In 1780, the bottom of the ship was covered with 3,923 sheets of copper.  The purpose of this was to protect the ship below the waterline from shipworm, which are mollusks that have a habit of boring into the wood, weakening it over time.
+
+                        </p>
+                    </div>
                 </div>
             </div>
         </>

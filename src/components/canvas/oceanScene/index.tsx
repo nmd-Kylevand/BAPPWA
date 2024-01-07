@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import React, { Suspense, useRef, useMemo, useState, useEffect } from 'react'
 import { Canvas, extend, useThree, useLoader, useFrame } from '@react-three/fiber'
-import { OrbitControls, Sky } from '@react-three/drei'
+import { OrbitControls, Sky, useIntersect } from '@react-three/drei'
 import { FBXLoader, Water } from 'three-stdlib'
 import dynamic from 'next/dynamic'
 
@@ -52,22 +52,25 @@ const CameraAnimation = () => {
 
     useEffect(() => {
         setStarted(true)
-    },[])
 
-    useFrame(state => {
-        if (started) {
-            state.camera.lookAt(15, 7, 2)
-            state.camera.position.lerp(vec.set(-8, 8, -14), .016)
-        }
-        setStarted(false)
- 
-        return null
     })
+
+    // useFrame(state => {
+    //     if (started) {
+    //         state.camera.lookAt(105, 7, 2)
+    //         state.camera.position.lerp(vec.set(-8, 8, -14), .016)
+    //     }
+    //     setStarted(false)
+ 
+    //     return null
+    // })
 
     return null
 }
 
 export function Model() {
+    const ref = useIntersect((visible) => console.log('object is visible', visible))
+
     return (
         <>
             <ambientLight />
@@ -77,10 +80,13 @@ export function Model() {
             <Suspense fallback={null}>
                 
                 <Ocean />
-                <Ship scale={100} distances={[0, 500]} position={[0, -21, 0]} />
+                <mesh ref={ref}>
+                    <Ship  scale={100} distances={[0, 500]} position={[-50, -21, -75]} />
+
+                </mesh>
             </Suspense>
             <Sky scale={1000} sunPosition={[500, 150, -1000]} turbidity={0.1} />
-            <OrbitControls enableZoom={false} />
+            <OrbitControls maxDistance={100} enableZoom={false} />
         </>    
         
     )

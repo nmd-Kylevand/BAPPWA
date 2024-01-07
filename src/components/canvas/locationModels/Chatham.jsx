@@ -10,7 +10,6 @@ import { useFrame } from "@react-three/fiber";
 const Ship = dynamic(() => import('@/components/canvas/ship').then((mod) => mod.Ship), {ssr: false})
 export function Model(props) {
   const { nodes, materials } = useGLTF("/chatham.glb");
-  const ship = useFBX("/ship.fbx")
   const animationRef = useRef()
 
   // useFrame(({clock}) =>{
@@ -22,7 +21,7 @@ export function Model(props) {
       <ambientLight />
       <PerspectiveCamera makeDefault fov={90} position={[7, 3, 7]} zoom={1} />
       <OrbitControls enableZoom={false}   minPolarAngle={0} maxPolarAngle={1.5} />
-      <mesh ref={animationRef}><Ship position={[-0.868, -0.1, 2.269]} /></mesh>
+      <mesh ref={animationRef}><Ship distances={[0,20]} position={[-0.868, -0.1, 2.269]} /></mesh>
       
       
       

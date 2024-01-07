@@ -13,48 +13,10 @@ import { MotionConfig, motion } from "framer-motion";
 import {transition} from "../../../src/helpers/transition"
 import { LayoutCamera } from "framer-motion-3d";
 import { degToRad } from "three/src/math/MathUtils";
+import { CapeStVincent, Chatham, Gibraltar, OceanModel, Toulon } from "./locations";
 
 
-const Toulon = dynamic(() => import('@/components/canvas/locationModels/index').then((mod) => mod.Toulon), {
-    ssr: false,
-    loading: () => {
 
-        return <Loader text='August 1793, France' />
-    },
-
-})
-const Gibraltar = dynamic(() => import('@/components/canvas/locationModels/index').then((mod) => mod.Gibraltar), {
-    ssr: false,
-    loading: () => {
-
-        return <Loader text='June 1779, Spain' />
-    },
-
-})
-const Chatham = dynamic(() => import('@/components/canvas/locationModels/Chatham').then((mod) => mod.Model), {
-    ssr: false,
-    loading: () => {
-
-        return <Loader text='May 1765, England' />
-    },
-
-})
-const CapeStVincent = dynamic(() => import('@/components/canvas/locationModels/index').then((mod) => mod.CapeStVincent), {
-    ssr: false,
-    loading: () => {
-
-        return <Loader text='February 1797, Portugal' />
-    },
-
-})
-const OceanModel = dynamic(() => import('@/components/canvas/ocean/index').then((mod) => mod.Model), {
-    ssr: false,
-    loading: () => {
-
-        return <Loader text='July 1778, France' />
-    },
-
-})
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
     ssr: false,
@@ -69,7 +31,6 @@ export default function Page({params}) {
     const [play, setPlay] = useState(false)
     const [isCompleted, setCompleted] = useState(false)
     const [isFullscreen, setFullscreen] = useState(false);
-    const prevScrollY = useRef(0);
 
     const pathname = usePathname()
     // Callback to check if the child component, SliderButton, is fully actived. A boolean is then passed to the 3dmodel to start the animation.
@@ -140,15 +101,94 @@ export default function Page({params}) {
     const renderSwitch = (param) => {
         switch (param) {
             case 'siege_of_toulon':
-                return <Toulon playAnimation={isCompleted} />
+                return (
+                    <>
+                    <LayoutCamera
+                            initial={false}
+                        transition={{ duration: 10 }}
+
+                            animate={
+                                isFullscreen
+                                    ? {
+                                        x: 20,
+                                        y: 5,
+                                        z: 18,
+                                        rotateY: degToRad(90),
+                                        fov: 15
+                                    }
+                                    : { x: -25, y: 0.25, z: 30, fov: 5 }
+                            }
+                        />
+                    <Toulon playAnimation={isCompleted} />
+                    </>
+                )
             case 'siege_of_gibraltar':
-                return <Gibraltar playAnimation={isCompleted} />
+                return (
+                    <>
+                         <LayoutCamera
+                            initial={false}
+                        transition={{ duration: 10 }}
+
+                            animate={
+                                isFullscreen
+                                    ? {
+                                        x: 20,
+                                        y: 5,
+                                        z: 10,
+                                        rotateY: degToRad(90),
+                                        fov: 30
+                                    }
+                                    : { x: 1, y: -1, z: -100, fov: 3 }
+                            }
+                        />
+                        <Gibraltar playAnimation={isCompleted} />
+
+                    </>
+                )
             case 'launch_of_the_hms_victory':
                 return <Chatham playAnimation={isCompleted} />
             case 'battle_of_cape_st._vincent':
-                return <CapeStVincent playAnimation={isCompleted} />
+                return (
+                    <>
+                        <LayoutCamera
+                            initial={false}
+                            transition={{ duration: 10 }}
+
+                            animate={
+                                isFullscreen
+                                    ? {
+                                        x: 0,
+                                        y: 15,
+                                        z: 80,
+                                        rotateY: degToRad(20),
+                                        fov: 5
+                                    }
+                                    : { x: 0, y: 2, z: 50, fov: 5 }
+                            }
+                        />
+                        <CapeStVincent playAnimation={isCompleted} />
+                    </>
+                )
             default:
-                return <OceanModel playAnimation={isCompleted} />
+                return (<>
+                    <LayoutCamera
+                        initial={false}
+                        transition={{ duration: 10 }}
+
+                        animate={
+                            isFullscreen
+                                ? {
+                                    x: 20,
+                                    y: 5,
+                                    z: 350,
+                                    rotateY: degToRad(60),
+                                    fov: 30
+                                }
+                                : { x: 350, y: 3, z: 350, fov: 10 }
+                        }
+                    />
+                    <OceanModel playAnimation={isCompleted} />
+            </>)
                 
         }
     }
@@ -157,15 +197,14 @@ export default function Page({params}) {
         <>
             
                 {/* @ts-ignore */}
-            <div className="background-image relative mb-44 h-full w-full items-center justify-center overflow-y-auto">
+            <div className=" relative z-40 mb-44 h-full w-full items-center justify-center overflow-y-auto">
                     
-                    <div >
-                        <div className={show ? 'h-full w-full bg-black/40' : ''}>
+                        <div className={show ? 'fixed h-full w-full bg-black/40' : ''}>
                             <div className="fixed left-10 top-16 ">
                                 <Link className="fontBold uppercase text-white" href="/overview">Back</Link>
 
                             </div>
-                            <div className={"w-[40rem] fixed  md:right-[5rem] xl:right-[45rem] 2xl:right-96 " + (show ? 'top-[10rem] 	' : 'md:top-[30rem] 2xl:top-84 ')}>
+                            <div className={"w-[40rem] fixed left-24   " + (show ? 'top-[15rem] 	' : 'md:top-[20rem] lg:top-[25rem] 2xl:top-[40rem]')}>
                                 <h1 className=" fontBlack w-96 "><span className="text-4xl">{event.location}</span> <FontAwesomeIcon onClick={() => setShow(!show)} className="ml-4 cursor-pointer text-white" icon={faChevronDown} /> <button><FontAwesomeIcon className="ml-3 cursor-pointer text-base" onClick={() => setPlay(!play)} icon={faVolumeHigh} /></button></h1>
 
                                 <h3 className="mt-2 w-96 text-xl">{event.date}</h3>
@@ -176,30 +215,14 @@ export default function Page({params}) {
                         </div>
                         
 
-                    </div>
                     <MotionConfig transition={transition}> 
                          <div
                             data-is-fullscreen={isFullscreen}
                             onScroll={() => setFullscreen(!isFullscreen)}
                         >
                             <motion.div className="container" layout>
-                                <View className="h-full w-full ">
-                                    <LayoutCamera
-                                        initial={false}
-                                    transition={{ duration: 10 }}
-
-                                        animate={
-                                            isFullscreen
-                                                ? {
-                                                    x: 10,
-                                                    y: 5,
-                                                    z: 10,
-                                                    rotateY: degToRad(90),
-                                                    fov: 30
-                                                }
-                                                : { x: 1, y: 0.25, z: 25, fov: 5 }
-                                        }
-                                    />
+                                <View className="mt-[5rem] h-full w-full">
+                                    
                                     {renderSwitch(slug)}
                                     
                                 </View>

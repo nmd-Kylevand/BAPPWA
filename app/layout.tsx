@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
-      <body>
+      <body className='background-image '>
         <nav className='absolute left-10 top-2 z-50'>
             <a className="mr-6 uppercase text-white" href="/">Home</a>
             <a className="uppercase text-white" href="/about">About</a>
