@@ -28,7 +28,11 @@ function Ocean() {
         }),
         [waterNormals]
     )
+    {/* @ts-ignore */ }
+
     useFrame((state, delta) => (ref.current.material.uniforms.time.value += delta))
+    {/* @ts-ignore */ }
+
     return <water ref={ref} args={[geom, config]} rotation-x={-Math.PI / 2} />
 }
 
@@ -81,10 +85,12 @@ export function Model() {
                 
                 <Ocean />
                 <mesh ref={ref}>
-                    <Ship  scale={100} distances={[0, 500]} position={[-50, -21, -75]} />
+                    <Ship  scale={100} distances={[0, 500]} position={[-50, -21, -75]} rotation={[0,0,0]} />
 
                 </mesh>
             </Suspense>
+            {/* @ts-ignore */}
+
             <Sky scale={1000} sunPosition={[500, 150, -1000]} turbidity={0.1} />
             <OrbitControls minPolarAngle={0} maxPolarAngle={1.5} maxDistance={100} enableZoom={false} />
         </>    

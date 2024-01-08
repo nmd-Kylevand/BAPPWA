@@ -19,7 +19,7 @@ export default function Page() {
     return (
         <>
             <div className='grid h-full grid-cols-2'>
-                <div onClick={() => router.push('/ship')} className="flex cursor-pointer bg-[url('/img/victory.jpg')] bg-center hover:contrast-100 hover:grayscale">
+                <div onClick={() => router.push('/ship')} className="flex cursor-pointer bg-[url('/img/victory.jpg')] bg-cover bg-center bg-no-repeat hover:contrast-100 hover:grayscale">
                     <div className='m-auto'>
                         <h1 className='text-center align-middle'>THE SHIP</h1>
                     </div>

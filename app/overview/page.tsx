@@ -110,7 +110,8 @@ export default function Page() {
                           <div>
                         
                               <div key={event.id} className="h-full sm:mt-[15rem] sm:w-1/2 md:mt-0 md:w-3/4 lg:w-full">
-                                
+                          {/* @ts-ignore */}
+
                                 <View className='md:h-[40%] lg:h-full xl:h-full'>
                                   <Suspense fallback={null}>
                                     <AnimatedEarth animation={index} />
