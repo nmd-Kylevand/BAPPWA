@@ -10,6 +10,9 @@ export function Ship({ position, scale, distances, rotation }){
   
     
     return (
+        <>
+
+                  {/* @ts-ignore */}
         <Detailed distances={distances}>
             
              
@@ -22,6 +25,7 @@ export function Ship({ position, scale, distances, rotation }){
                 <primitive object={mid.scene} />
             </mesh>
         </Detailed>
+        </>
         
     )
 }
