@@ -7,6 +7,8 @@ import { Suspense, useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import { useScroll, useTransform, motion, useSpring, useMotionValue } from "framer-motion"
 import svgRoute from "../../public/img/path.svg"
+import SliderButton from "@/components/slider/Slider"
+import Link from "next/link"
 
 
 
@@ -24,16 +26,27 @@ loading: () => <Html as='div'>
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
 })
+const Slider = dynamic(() => import('@/components/slider/Slider'), { ssr: false })
 
+function LinePath(){
+  const path = () => (
+    <svg id="eRV3SWg2arp1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 0 300 300" shape-rendering="geometricPrecision" text-rendering="geometricPrecision">
+      <defs>
+        <path id="route" d="M244.86026,174.08811c-26.25789,0-155.69298-1.0248-133.58598-61.81904c11.97612-32.93431,72.20369-23.47466,62.52961.71056-6.93158,17.32896-65.16387-7.69837-88.1099,10.65846-16.53345,13.22676-25.71382,46.243-4.97395,57.55566c8.2853,4.51926,28.75961-1.8675,26.29086-14.21127-6.5568-32.78399-73.99845-12.79015-95.9261-12.79015" transform="translate(0 0.000001)" fill="none" stroke="#fff" stroke-width="1" />
+        <mask id='mask1'><use className="mask" xlinkHref="#route"/></mask>
+      </defs>
+      <use className="paths" xlinkHref="#route" mask="url(#mask1)" />
+
+    </svg>
+
+  )
+  return path();
+}
 
 export default function Page() {
 
-    const [timelineValue, setTimelineValue] = useState(0)
     const [events, setEvents] = useState([])
-    // Gets the value from the timeline component and passes it down to play the right animation on the globe
-    const childValue = (value) => {
-        setTimelineValue(value)
-    }
+    
     const ref = useRef(null)
     const { scrollXProgress } = useScroll({container: ref})
 
@@ -62,7 +75,13 @@ export default function Page() {
             <svg className="ml-3 block pt-3" height={30} viewBox="0 0 400 100">
               <line x1={0} x2={400} pathLength={1} className="bg-white" stroke="white" stroke-width={20} />
             </svg>
+          
+            
           </div>
+        </div>
+        
+        <div className="absolute mb-[50rem] h-1/4 w-1/4 sm:left-[29rem] sm:top-[10rem] 2xl:left-[32rem] 2xl:top-[12rem]">
+          <LinePath />
         </div>
         <div ref={ref} className="flex h-full w-full snap-x snap-mandatory  overflow-x-auto	[-ms-overflow-style:'none'] [scrollbar-width:'none'] [&::-webkit-scrollbar]:hidden	">
           
@@ -71,19 +90,28 @@ export default function Page() {
                   <>
             
                     
-                    <div className="grid h-full w-full shrink-0  snap-end  grid-cols-2">
+                    <div className="grid h-full w-full shrink-0  snap-end  grid-cols-2 overflow-y-hidden">
                           <div className="ml-14">
                               <div className="text-4xl uppercase md:mt-52 2xl:mt-72"><h1 className="fontBold">{event.title}</h1></div>
-                              <div className="w-3/4 text-sm md:mt-52 2xl:mt-72"><p>{event.intro}</p></div>
+                            <div className="ml-[23rem] mt-[5.2rem] w-64 text-xl">
+                          <Link className="cursor-pointer uppercase text-white " href={'/event/' + event.slug} >Visit</Link>
+
+                            </div>
+                              <div className="w-3/4 text-sm md:mt-44 2xl:mt-52"><p>{event.intro}</p></div>
+                              
                               <div className="mt-4 text-2xl"><p className="fontBold">{event.year}</p></div>
                               <svg height={100} id="progress" viewBox="0 0 400 100">
                                   <line x1={0} x2={400} pathLength={1} className="bg" stroke-width={20} strokeLinecap="round" strokeLinejoin="round" />
                                   <motion.line x1={0} x2={400} className="indicator" pathLength={1} stroke-width={20} style={{ pathLength: scrollXProgress }} strokeLinecap={"round"} strokeLinejoin={"round"} />
                               </svg>
+                       
                             </div>
+                            
                           <div>
-                              <div key={event.id} className="h-full w-full">
-                                <View className=' lg:h-full xl:h-full'>
+                        
+                              <div key={event.id} className="h-full sm:mt-[15rem] sm:w-1/2 md:mt-0 md:w-3/4 lg:w-full">
+                                
+                                <View className='md:h-[40%] lg:h-full xl:h-full'>
                                   <Suspense fallback={null}>
                                     <AnimatedEarth animation={index} />
 

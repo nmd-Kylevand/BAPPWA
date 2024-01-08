@@ -1,10 +1,10 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client"
 
 import Loader from "@/components/loader/Loader"
 import { Html } from "@react-three/drei"
 import dynamic from "next/dynamic"
 import { Suspense, useEffect, useRef, useState } from "react"
-import { getData } from "../api/Events/route"
 import { Canvas } from "@react-three/fiber"
 import shipPainting from "../../public/img/victory.png"
 import shipPhoto from "../../public/img/victory2.png"
@@ -50,7 +50,7 @@ export default function Page() {
 
                 <OceanScene/>
             </Canvas>
-            <div ref={container} className="cloudy_background overflow-x-hidden	 bg-[#DEDEDE] text-[#434343]">
+            <div ref={container} className="cloudy_background overflow-hidden 	 bg-[#DEDEDE] text-[#434343]">
                 <motion.div style={{ y: md }} className="grid grid-cols-3 gap-4 pt-8 uppercase">
                     <p className="ml-14 text-xs tracking-[0.2rem] text-[#434343]">Chatham</p>
                     <p className="justify-self-center text-xs  tracking-[0.2rem] text-[#434343]">Construction</p>
@@ -60,11 +60,11 @@ export default function Page() {
                     <Image
                         src={shipPainting}
                         alt="painting of the HMS Victory"
-                        className=" absolute right-[26rem]  w-1/3"/>
+                        className=" absolute md:right-[10rem] md:w-[45%]  xl:right-[26rem] 2xl:w-[45%]"/>
                     <Image
                         src={shipPhoto}
                         alt="old photo of the HMS Victory"
-                        className="mt-40 w-1/3"
+                        className="mt-40 sm:w-[75%] md:w-[45%] 2xl:w-[45%]"
                     />
                 </motion.div>
                 <motion.div style={{y: md}} className="flex items-center justify-center pt-14">
@@ -77,7 +77,7 @@ export default function Page() {
                         <p className="w-[53rem] text-center text-2xl text-[#434343]">The HMS Victory has three masts and had a total of thirty-seven sails.  The fastest the ship was ever recorded as going was 11 knots, which is the equivalent of 12 miles per hour.</p>
 
                     </div>
-                    <motion.div style={{y:lg}} className="flex items-center justify-center pt-20">
+                    <motion.div style={{y:lg}} className="flex items-center justify-center pt-[25rem]">
                         <Image
                             src={sails}
                             alt="image of some sails"
@@ -86,9 +86,9 @@ export default function Page() {
                     </motion.div>
                   
                 </div>
-                <div className="relative bottom-72 left-[55rem]" >
+                <div className="relative bottom-72 sm:left-[15rem] md:left-[55rem] lg:left-[40rem]  2xl:left-[75rem]" >
                     <motion.div style={{y: lg}} className="">
-                        <p className="ml-44 pb-44 text-xs uppercase  tracking-[0.2rem] text-[#434343]">The captain</p>
+                        <p className="pb-44 text-xs uppercase tracking-[0.2rem] text-[#434343]  md:ml-44 lg:ml-[40rem] 2xl:ml-[18rem]">The captain</p>
                         <Image
                             src={captain}
                             alt="image of Nelson"
@@ -98,7 +98,7 @@ export default function Page() {
 
                     </motion.div>
                  </div>
-                <div className="absolute top-[185rem]  pl-10">
+                <div className="absolute pl-10 md:top-[200rem]   2xl:top-[240rem]">
                     <div className="pb-36">
                         <p className="pb-16 text-xs uppercase tracking-[0.2rem]  text-[#434343]">Don't drink the water</p>
                         <p className="w-[30rem] text-[#434343]">

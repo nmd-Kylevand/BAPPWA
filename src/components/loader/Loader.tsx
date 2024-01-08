@@ -15,7 +15,7 @@ const StyledH1 = styled.h1`
 export default function Loader(prop: MyComponentProps){
    
     return (
-        <Html  fullscreen as="div" className="absolute left-0 top-0 flex h-full w-full items-center justify-center overflow-hidden">
+        <Html prepend as="div" className="absolute inset-0 z-40 flex h-full w-full items-center justify-center overflow-hidden">
             
             <VideoComponent/>
             <StyledH1>{prop.text}</StyledH1>

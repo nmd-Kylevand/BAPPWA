@@ -113,6 +113,55 @@ canvas {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-#test{
-  padding-top: 140px;
+
+
+.paths {
+  fill: none;
+  stroke: grey;
+  stroke-dasharray: 5;
+  stroke-width: 5;
+  stroke-linejoin: round;
 }
+
+.mask {
+  fill: none;
+  stroke: white;
+  stroke-width: 10;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 5s linear alternate infinite;
+  animation-delay: 3000ms;
+
+}
+
+/* does not work in IE, need JS to animate there */
+@keyframes dash {
+  from {
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+#eventLink {
+    box-shadow: 0px 0px 1px 1px white;
+    border-radius: 50%;
+   
+    animation: pulse-animation 2s infinite;
+}
+#eventLink:after{
+    border: 2px solid white;
+    background-clip: padding-box;
+
+    padding: 10px;
+}
+  
+@keyframes pulse-animation {
+    0% {
+      box-shadow: 0 0 0 0px rgba(255, 255, 255, 0.477);
+    }
+    100% {
+      box-shadow: 0 0 0 20px rgb(255, 255, 255, 0);
+    }
+  }

@@ -1,5 +1,0 @@
-// eslint-disable-next-line import/no-anonymous-default-export
-export default `
-The Siege of Gibraltar took place during the American Revolutionary War and lasted from 1779 to 1783. It involved a prolonged blockade and military campaign by the Spanish and French forces against the British-held fortress of Gibraltar. The objective was to capture Gibraltar and gain control of the strategic Mediterranean passage.
-By the year 1782, the HMS Victory had already amassed a significant number of distinguished naval battle accolades. It assumed the role of Lord Howe's flagship of a powerful escort flotilla for a convoy of transports and actively participated in the Relief of Gibraltar on October 11th of the same year. The significance of this relief operation cannot be emphasized enough. The supplies that the ships brought allowed the Gibraltar garrison to continue to hold out against the besieging forces. Moreover, this decisive action ensured the continuous presence of the British at the gateway to the Mediterranean.
-`

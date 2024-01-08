@@ -86,7 +86,7 @@ export function Model() {
                 </mesh>
             </Suspense>
             <Sky scale={1000} sunPosition={[500, 150, -1000]} turbidity={0.1} />
-            <OrbitControls maxDistance={100} enableZoom={false} />
+            <OrbitControls minPolarAngle={0} maxPolarAngle={1.5} maxDistance={100} enableZoom={false} />
         </>    
         
     )

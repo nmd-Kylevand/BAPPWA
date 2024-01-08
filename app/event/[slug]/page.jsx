@@ -27,7 +27,7 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
 
 export default function Page({params}) {
     const [event, setEvent] = useState({})
-    const [show, setShow] = useState(false)
+    const [show, setShow] = useState(true)
     const [play, setPlay] = useState(false)
     const [isCompleted, setCompleted] = useState(false)
     const [isFullscreen, setFullscreen] = useState(false);
@@ -76,12 +76,12 @@ export default function Page({params}) {
             }
 
             // Check if scrolling down for text pop up
-            if (scrollPosition > textPopUpTreshold && !show) {
-                setShow(true)
+            if (scrollPosition > textPopUpTreshold && show) {
+                setShow(false)
             }
             // Check if scrolling up for text pop up
-            if (scrollPosition <= textPopUpTreshold && show) {
-                setShow(false)
+            if (scrollPosition <= textPopUpTreshold && !show) {
+                setShow(true)
             }
 
            
@@ -146,7 +146,28 @@ export default function Page({params}) {
                     </>
                 )
             case 'launch_of_the_hms_victory':
-                return <Chatham playAnimation={isCompleted} />
+                return (
+                    <>
+                        
+                            <LayoutCamera
+                                initial={false}
+                                transition={{ duration: 10 }}
+
+                                animate={
+                                    isFullscreen
+                                        ? {
+                                            x: 0,
+                                            y: 15,
+                                            z: 80,
+                                            rotateY: degToRad(20),
+                                            fov: 5
+                                        }
+                                        : { x: 0, y: 2, z: 50, fov: 5 }
+                                }
+                            />
+                            <Chatham playAnimation={isCompleted} />
+
+                    </>)
             case 'battle_of_cape_st._vincent':
                 return (
                     <>
@@ -195,13 +216,13 @@ export default function Page({params}) {
 
     return (
         <>
-            
+
                 {/* @ts-ignore */}
-            <div className=" relative z-40 mb-44 h-full w-full items-center justify-center overflow-y-auto">
-                    
+            <div className=" relative z-40  h-full w-full items-center justify-center overflow-y-auto [-ms-overflow-style:'none'] [scrollbar-width:'none'] [&::-webkit-scrollbar]:hidden	">
+
                         <div className={show ? 'fixed h-full w-full bg-black/40' : ''}>
                             <div className="fixed left-10 top-16 ">
-                                <Link className="fontBold uppercase text-white" href="/overview">Back</Link>
+                                <a className="fontBold uppercase text-white" href="/overview">Back</a>
 
                             </div>
                             <div className={"w-[40rem] fixed left-24   " + (show ? 'top-[15rem] 	' : 'md:top-[20rem] lg:top-[25rem] 2xl:top-[40rem]')}>
@@ -235,8 +256,8 @@ export default function Page({params}) {
                     
 
                 </div>
-                <div className="h-full"></div>
-                <div className="h-full"></div>
+                <div className="background-image h-full"></div>
+                <div className="background-image h-full"></div>
                 
 
 

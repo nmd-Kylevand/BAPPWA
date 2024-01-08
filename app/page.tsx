@@ -9,12 +9,7 @@ const Title = styled.h1`
   color: white;
 `
 const OffScreenDiv = styled.div`
-  width: 75%; /* Set the width to 50% of the viewport */
-  position: absolute;
-  top: 0;
-  right: -15%; /* Set the right value to half of the width (-25% of the viewport) */
-  height: 100vh; /* Set the height to cover the entire viewport */
-  overflow: hidden;
+  posistion= abso
 `
 
 const Slider = dynamic(() => import('@/components/slider/Slider'), {ssr:false})
@@ -55,13 +50,11 @@ export default function Page() {
         </div>
         
         
-        <OffScreenDiv>
           {/* @ts-ignore */}
-          <View className='absolute top-0	z-50 flex h-full w-full '>
+          <View className='fixed left-[30rem] top-0	z-50  h-full w-full '>
 
-                <Earth earthScale={0.681} cloudScale={0.69} />  
+                <Earth earthScale={0.8} cloudScale={0.8009} />  
             </View>
-        </OffScreenDiv>
             
          {/* <VideoComponent/> */}
       </div>

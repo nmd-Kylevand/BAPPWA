@@ -20,7 +20,7 @@ const theme = createTheme({
     }
 })
 
-const SliderButton = ({direction, route, sliderEnd}: MyComponentProps) => {
+const SliderButton = ({direction, route, sliderEnd,}: MyComponentProps) => {
     const [value, setValue] = useState(0)
     const [isCompleted, setCompleted] = useState(false)
 
@@ -50,6 +50,7 @@ const SliderButton = ({direction, route, sliderEnd}: MyComponentProps) => {
             min={0}
             max={50}
             onChange={handleChange}
+            track="inverted"
         sx={{
             '& input[type="range"]': {
                 WebkitAppearance: 'slider-vertical',
