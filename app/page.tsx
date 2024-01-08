@@ -53,7 +53,7 @@ export default function Page() {
           {/* @ts-ignore */}
           <View className='fixed left-[30rem] top-0	z-50  h-full w-full '>
 
-                <Earth earthScale={0.8} cloudScale={0.8009} />  
+                <Earth earthScale={0.8} cloudScale={0.805} />  
             </View>
             
          {/* <VideoComponent/> */}
