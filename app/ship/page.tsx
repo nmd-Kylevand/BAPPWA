@@ -86,7 +86,7 @@ export default function Page() {
                     </motion.div>
                   
                 </div>
-                <div className="relative bottom-72 sm:left-[15rem] md:left-[55rem] lg:left-[55rem]  2xl:left-[75rem]" >
+                <div className="relative bottom-72 sm:left-[15rem] md:left-[55rem] lg:left-[50rem]  2xl:left-[75rem]" >
                     <motion.div style={{y: lg}} className="">
                         <p className="pb-44 text-xs uppercase tracking-[0.2rem] text-[#434343]  md:ml-44 lg:ml-[12rem] 2xl:ml-[18rem]">The captain</p>
                         <Image

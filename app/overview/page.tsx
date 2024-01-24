@@ -80,7 +80,7 @@ export default function Page() {
           </div>
         </div>
         
-        <div className="absolute mb-[50rem] h-1/4 w-1/4 sm:left-[29rem] sm:top-[10rem] 2xl:left-[32rem] 2xl:top-[12rem]">
+        <div className="absolute mb-[50rem] h-1/4 w-1/4 sm:left-[29rem] sm:top-[10rem] md:left-[31rem] md:top-[15rem] lg:top-[14rem] 2xl:left-[32rem] 2xl:top-[12rem]">
           <LinePath />
         </div>
         <div ref={ref} className="flex h-full w-full snap-x snap-mandatory  overflow-x-auto	[-ms-overflow-style:'none'] [scrollbar-width:'none'] [&::-webkit-scrollbar]:hidden	">
@@ -109,10 +109,10 @@ export default function Page() {
                             
                           <div>
                         
-                              <div key={event.id} className="h-full sm:mt-[15rem] sm:w-1/2 md:mt-0 md:w-3/4 lg:w-full">
+                          <div key={event.id} className="sm:mt-[15rem] sm:w-1/2 md:ml-44 md:mt-44  lg:ml-[10rem] lg:mt-32 lg:h-[98%] lg:w-[98%] 2xl:ml-0 2xl:mt-0">
                           {/* @ts-ignore */}
 
-                                <View className='md:h-[40%] lg:h-full xl:h-full'>
+                          <View className=' h-full w-full md:h-3/5 md:w-3/5 2xl:h-full 2xl:w-full'>
                                   <Suspense fallback={null}>
                                     <AnimatedEarth animation={index} />
 

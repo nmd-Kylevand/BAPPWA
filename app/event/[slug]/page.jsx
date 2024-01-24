@@ -242,7 +242,7 @@ export default function Page({params}) {
                             onScroll={() => setFullscreen(!isFullscreen)}
                         >
                             <motion.div className="container" layout>
-                                <View className="mt-[5rem] h-full w-full">
+                                <View className="mt-[5rem]  h-full w-full">
                                     
                                     {renderSwitch(slug)}
                                     
